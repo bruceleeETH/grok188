@@ -14,7 +14,6 @@
     --up: #c43c2c;
     --down: #1a7a4c;
     --flat: #8a8378;
-    --chip: #efe8dc;
   }
   * { box-sizing: border-box; }
   body {
@@ -37,30 +36,50 @@
     padding: 8px 14px;
     white-space: nowrap;
   }
+  h2.sec {
+    margin: 0 0 12px;
+    font-size: 13px;
+    letter-spacing: .08em;
+    color: var(--muted);
+    font-weight: 650;
+  }
   .heroes {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 12px;
     margin-bottom: 28px;
   }
-  .hero {
+  .hero, .hold {
     background: var(--paper);
     border: 1px solid var(--line);
     border-radius: 16px;
-    padding: 16px 16px 14px;
+    padding: 14px 14px 12px;
     box-shadow: 0 8px 24px rgba(60, 40, 10, .04);
   }
-  .hero .k { color: var(--muted); font-size: 12px; }
-  .hero .v { font-size: 28px; font-weight: 650; margin-top: 8px; font-variant-numeric: tabular-nums; }
-  .hero.up .v { color: var(--up); }
-  .hero.down .v { color: var(--down); }
-  .hero.flat .v { color: var(--flat); }
+  .hero .k, .hold .code { color: var(--muted); font-size: 12px; }
+  .hero .v, .hold .v {
+    font-size: 26px;
+    font-weight: 650;
+    margin-top: 6px;
+    font-variant-numeric: tabular-nums;
+  }
+  .holds {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .hold .name { font-weight: 650; margin-top: 2px; }
+  .hero.up .v, .hold.up .v { color: var(--up); }
+  .hero.down .v, .hold.down .v { color: var(--down); }
+  .hero.flat .v, .hold.flat .v { color: var(--flat); }
   .panel {
     background: var(--paper);
     border: 1px solid var(--line);
     border-radius: 18px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(60, 40, 10, .05);
+    margin-bottom: 18px;
   }
   .panel h2 {
     margin: 0;
@@ -74,7 +93,7 @@
     width: 100%;
     border-collapse: collapse;
     font-variant-numeric: tabular-nums;
-    min-width: 1080px;
+    min-width: 880px;
   }
   thead th {
     position: sticky;
@@ -100,14 +119,14 @@
     text-align: right;
     border-top: 1px solid #f0eae0;
   }
-  td.theme { text-align: left; color: var(--muted); max-width: 220px; }
+  td.theme { text-align: left; color: var(--muted); min-width: 140px; }
   tbody tr:hover td, tbody tr:hover th { background: #fff8ee; }
   .n.up { color: var(--up); }
   .n.down { color: var(--down); }
   .n.flat { color: var(--flat); }
-  .empty td { text-align: center; color: var(--muted); padding: 48px 16px; }
+  .empty td { text-align: center; color: var(--muted); padding: 40px 16px; }
   footer {
-    margin-top: 18px;
+    margin-top: 8px;
     color: var(--muted);
     font-size: 12px;
     display: flex;
@@ -118,8 +137,8 @@
   .dot { width: 8px; height: 8px; border-radius: 50%; }
   .dot.up { background: var(--up); }
   .dot.down { background: var(--down); }
-  @media (max-width: 800px) {
-    .heroes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (max-width: 900px) {
+    .heroes, .holds { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     h1 { font-size: 24px; }
     header.top { flex-direction: column; align-items: start; }
   }
@@ -130,35 +149,51 @@
   <header class="top">
     <div>
       <h1>大A交易日志</h1>
-      <div class="sub">一天一行 · 隔夜外盘对照当天持仓</div>
+      <div class="sub">隔夜天气 · 12 只持仓 · 一天一行</div>
     </div>
     <div class="meta">最近交易日 尚无数据</div>
   </header>
+  <h2 class="sec">隔夜天气</h2>
   <section class="heroes">
-    <article class="hero flat"><div class="k">隔夜 SOXX</div><div class="v">—</div></article><article class="hero flat"><div class="k">沪指</div><div class="v">—</div></article><article class="hero flat"><div class="k">芯片ETF</div><div class="v">—</div></article><article class="hero flat"><div class="k">新易盛</div><div class="v">—</div></article><article class="hero flat"><div class="k">黄金ETF</div><div class="v">—</div></article>
+    <article class="hero flat"><div class="k">隔夜 SOXX</div><div class="v">—</div></article><article class="hero flat"><div class="k">隔夜原油</div><div class="v">—</div></article><article class="hero flat"><div class="k">隔夜黄金</div><div class="v">—</div></article><article class="hero flat"><div class="k">沪指</div><div class="v">—</div></article>
+  </section>
+  <h2 class="sec">持仓</h2>
+  <section class="holds">
+    <article class="hold flat"><div class="code">000333</div><div class="name">美的集团</div><div class="v">—</div></article><article class="hold flat"><div class="code">300502</div><div class="name">新易盛</div><div class="v">—</div></article><article class="hold flat"><div class="code">600183</div><div class="name">生益科技</div><div class="v">—</div></article><article class="hold flat"><div class="code">002491</div><div class="name">通鼎互联</div><div class="v">—</div></article><article class="hold flat"><div class="code">002428</div><div class="name">云南锗业</div><div class="v">—</div></article><article class="hold flat"><div class="code">603516</div><div class="name">淳中科技</div><div class="v">—</div></article><article class="hold flat"><div class="code">301316</div><div class="name">慧博云通</div><div class="v">—</div></article><article class="hold flat"><div class="code">588200</div><div class="name">科创芯片ETF</div><div class="v">—</div></article><article class="hold flat"><div class="code">515880</div><div class="name">通信ETF</div><div class="v">—</div></article><article class="hold flat"><div class="code">159992</div><div class="name">创新药ETF</div><div class="v">—</div></article><article class="hold flat"><div class="code">159937</div><div class="name">黄金ETF</div><div class="v">—</div></article><article class="hold flat"><div class="code">512100</div><div class="name">中证1000ETF</div><div class="v">—</div></article>
   </section>
   <section class="panel">
-    <h2>按日期对照</h2>
+    <h2>隔夜外盘对照</h2>
     <div class="scroll">
       <table>
         <thead>
           <tr>
             <th class="date">日期</th>
             <th class="g">SOXX</th><th class="g">NVDA</th><th class="g">AMD</th><th class="g">TSM</th><th class="g">AVGO</th><th class="g">LITE</th><th class="g">MU</th><th class="g">原油</th><th class="g">黄金</th>
-            <th class="a">沪指</th><th class="a">芯片ETF</th><th class="a">新易盛</th><th class="a">创新药</th><th class="a">黄金ETF</th>
+          </tr>
+        </thead>
+        <tbody><tr class="empty"><td colspan="10">还没有交易日。收盘后补隔夜外盘。</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+  <section class="panel">
+    <h2>持仓对照</h2>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th class="date">日期</th>
+            <th class="a">美的集团</th><th class="a">新易盛</th><th class="a">生益科技</th><th class="a">通鼎互联</th><th class="a">云南锗业</th><th class="a">淳中科技</th><th class="a">慧博云通</th><th class="a">科创芯片ETF</th><th class="a">通信ETF</th><th class="a">创新药ETF</th><th class="a">黄金ETF</th><th class="a">中证1000ETF</th>
             <th class="date">当天主线</th>
           </tr>
         </thead>
-        <tbody>
-          <tr class="empty"><td colspan="16">还没有交易日。每个交易日收盘后会补一行，红涨绿跌。</td></tr>
-        </tbody>
+        <tbody><tr class="empty"><td colspan="14">还没有交易日。收盘后补持仓涨跌和当天主线。</td></tr></tbody>
       </table>
     </div>
   </section>
   <footer>
     <span class="leg"><i class="dot up"></i>红涨</span>
     <span class="leg"><i class="dot down"></i>绿跌</span>
-    <span>橙色列为隔夜美股/商品，蓝色列为当天 A 股。数字均为已核实报价，空着就是当天没拉到，不会编。</span>
+    <span>上面卡片是最近一个交易日。数字空着就是还没拉到，不会编。</span>
   </footer>
 </main>
 </body>
