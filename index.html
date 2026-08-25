@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大A交易日志</title>
+<style>
+  :root {
+    --bg: #f6f3ee;
+    --paper: #fffdf8;
+    --ink: #1c1916;
+    --muted: #6f675e;
+    --line: #e6dfd4;
+    --up: #c43c2c;
+    --down: #1a7a4c;
+    --flat: #8a8378;
+    --chip: #efe8dc;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background:
+      radial-gradient(900px 420px at 8% -10%, #fff7e6 0%, transparent 55%),
+      var(--bg);
+    font: 15px/1.5 "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", -apple-system, sans-serif;
+  }
+  main { max-width: 1180px; margin: 0 auto; padding: 36px 20px 64px; }
+  header.top { display: flex; justify-content: space-between; gap: 16px; align-items: end; margin-bottom: 28px; }
+  h1 { margin: 0; font-size: 28px; letter-spacing: .02em; }
+  .sub { color: var(--muted); margin-top: 6px; }
+  .meta {
+    color: var(--muted);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 14px;
+    white-space: nowrap;
+  }
+  .heroes {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .hero {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 16px 16px 14px;
+    box-shadow: 0 8px 24px rgba(60, 40, 10, .04);
+  }
+  .hero .k { color: var(--muted); font-size: 12px; }
+  .hero .v { font-size: 28px; font-weight: 650; margin-top: 8px; font-variant-numeric: tabular-nums; }
+  .hero.up .v { color: var(--up); }
+  .hero.down .v { color: var(--down); }
+  .hero.flat .v { color: var(--flat); }
+  .panel {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(60, 40, 10, .05);
+  }
+  .panel h2 {
+    margin: 0;
+    padding: 16px 18px 0;
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .scroll { overflow-x: auto; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+    min-width: 1080px;
+  }
+  thead th {
+    position: sticky;
+    top: 0;
+    background: #faf6ef;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-align: right;
+    padding: 14px 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  thead th.date, tbody th { text-align: left; }
+  thead th.g { color: #9a4b2e; }
+  thead th.a { color: #2d5a8a; }
+  tbody th {
+    padding: 12px 10px 12px 18px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  td {
+    padding: 12px 10px;
+    text-align: right;
+    border-top: 1px solid #f0eae0;
+  }
+  td.theme { text-align: left; color: var(--muted); max-width: 220px; }
+  tbody tr:hover td, tbody tr:hover th { background: #fff8ee; }
+  .n.up { color: var(--up); }
+  .n.down { color: var(--down); }
+  .n.flat { color: var(--flat); }
+  .empty td { text-align: center; color: var(--muted); padding: 48px 16px; }
+  footer {
+    margin-top: 18px;
+    color: var(--muted);
+    font-size: 12px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .leg { display: inline-flex; align-items: center; gap: 6px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot.up { background: var(--up); }
+  .dot.down { background: var(--down); }
+  @media (max-width: 800px) {
+    .heroes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    h1 { font-size: 24px; }
+    header.top { flex-direction: column; align-items: start; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <div>
+      <h1>大A交易日志</h1>
+      <div class="sub">一天一行 · 隔夜外盘对照当天持仓</div>
+    </div>
+    <div class="meta">最近交易日 尚无数据</div>
+  </header>
+  <section class="heroes">
+    <article class="hero flat"><div class="k">隔夜 SOXX</div><div class="v">—</div></article><article class="hero flat"><div class="k">沪指</div><div class="v">—</div></article><article class="hero flat"><div class="k">芯片ETF</div><div class="v">—</div></article><article class="hero flat"><div class="k">新易盛</div><div class="v">—</div></article><article class="hero flat"><div class="k">黄金ETF</div><div class="v">—</div></article>
+  </section>
+  <section class="panel">
+    <h2>按日期对照</h2>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th class="date">日期</th>
+            <th class="g">SOXX</th><th class="g">NVDA</th><th class="g">AMD</th><th class="g">TSM</th><th class="g">AVGO</th><th class="g">LITE</th><th class="g">MU</th><th class="g">原油</th><th class="g">黄金</th>
+            <th class="a">沪指</th><th class="a">芯片ETF</th><th class="a">新易盛</th><th class="a">创新药</th><th class="a">黄金ETF</th>
+            <th class="date">当天主线</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="empty"><td colspan="16">还没有交易日。每个交易日收盘后会补一行，红涨绿跌。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <footer>
+    <span class="leg"><i class="dot up"></i>红涨</span>
+    <span class="leg"><i class="dot down"></i>绿跌</span>
+    <span>橙色列为隔夜美股/商品，蓝色列为当天 A 股。数字均为已核实报价，空着就是当天没拉到，不会编。</span>
+  </footer>
+</main>
+</body>
+</html>
